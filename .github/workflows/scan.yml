@@ -34,10 +34,10 @@ jobs:
           MAX_SEARCHES: "8"
         run: python scanner.py
 
-      - name: Commit updated memory
+- name: Commit updated memory
         run: |
           git config user.name "Opportunity Scanner Bot"
           git config user.email "scanner@bot.local"
-          git add data/seen.json
+          git add data/seen.json || true
           git diff --cached --quiet || git commit -m "🔍 Update seen opportunities — $(date -u +%Y-%m-%d)"
-          git push
+          git push || true

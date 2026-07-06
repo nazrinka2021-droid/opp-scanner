@@ -1,11 +1,8 @@
 name: Opportunity Scanner
 
 on:
-  # Runs every day at 8:00 AM UTC (12:00 PM Baku / 9:00 AM Edinburgh)
   schedule:
     - cron: "0 8 * * *"
-
-  # Also lets you trigger it manually from the GitHub UI
   workflow_dispatch:
 
 jobs:
@@ -34,10 +31,10 @@ jobs:
           MAX_SEARCHES: "8"
         run: python scanner.py
 
-- name: Commit updated memory
+      - name: Commit updated memory
         run: |
           git config user.name "Opportunity Scanner Bot"
           git config user.email "scanner@bot.local"
           git add data/seen.json || true
-          git diff --cached --quiet || git commit -m "🔍 Update seen opportunities — $(date -u +%Y-%m-%d)"
+          git diff --cached --quiet || git commit -m "Update seen opportunities"
           git push || true

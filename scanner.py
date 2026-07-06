@@ -292,10 +292,11 @@ def run_agent(name: str, system: str, user_template: str) -> list[dict]:
             model=MODEL,
             max_tokens=8192,
             system=system,
-            tools=[{
+          tools=[{
                 "type": "web_search_20260318",
                 "name": "web_search",
                 "max_uses": MAX_SEARCHES_PER_AGENT,
+                "allowed_callers": ["direct"],
             }],
             messages=[{"role": "user", "content": user_msg}],
         )
